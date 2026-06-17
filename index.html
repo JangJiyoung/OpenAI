@@ -96,7 +96,12 @@
         }
 
         if (!isRecording) {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                audio: {
+                    echoCancellation: true, // 에코 캔슬링 활성화 (파형 데이터에 중요)
+                    noiseSuppression: true
+                } 
+            });
             
             // AudioContext 연결 (파형 시각화용)
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
